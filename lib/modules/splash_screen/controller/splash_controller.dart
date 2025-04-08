@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:route_roster_pro/modules/login_screen/view/login_screen.dart';
+import 'package:route_roster_pro/modules/login_screen/view/login_screen.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../utils/app_prefrance.dart';
@@ -23,13 +25,14 @@ class SplashController extends GetxController {
     if (apiToken != null && apiToken.isNotEmpty) {
       // If token exists, navigate to BottomBar
 
-      Get.to(()=> MapView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
+      // Get.to(()=> LoginView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
 
     } else {
       // If token doesn't exist, navigate to LoginScreen
-      Get.to(()=> MapView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
+      // Get.to(()=> LoginView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
 
     }
+    Get.offNamed(Routes.LOGIN);
   }
 
 }

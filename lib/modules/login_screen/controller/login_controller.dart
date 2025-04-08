@@ -1,43 +1,75 @@
-import 'dart:developer';
+import 'package:get/get.dart';
+import 'package:route_roster_pro/modules/track_screen/view/map_view.dart';
 
-import 'package:dio/dio.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import '../../../routes/app_pages.dart';
+import '../../../utils/common_import.dart';
+import '../../../utils/enums.dart';
 
 class LoginController extends GetxController {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  Rx<LoginType> loginType = LoginType.guardian.obs;
+  Rx<LoginType> displayNameLeft = LoginType.coordinator.obs;
+  Rx<LoginType> displayNameRight = LoginType.driver.obs;
+  RxString errorEmail = ''.obs;
+  RxString errorPassword = ''.obs;
+  RxBool isWrongUser = false.obs;
+  RxBool obscureText = false.obs;
 
-  /*
-  void validateEmail(AppLocalizations localizations) {
+  void validateEmail() {
     final email = emailController.text.trim();
     if (email.isEmpty) {
       isWrongUser.value = true;
-      errorEmail.value = localizations.pleaseEmail;
+      errorEmail.value = "Please enter a valid email ID";
     } else if (!GetUtils.isEmail(email)) {
       isWrongUser.value = true;
-      errorEmail.value = localizations.pleaseValidEmail;
+      errorEmail.value = "Please enter a valid email ID";
     } else {
       errorEmail.value = '';
-      if(errorPassword.value.isEmpty){
+      if (errorPassword.value.isEmpty) {
         isWrongUser.value = false;
       }
     }
   }
 
-  void validatePassword(AppLocalizations localizations) {
+  void validatePassword() {
     final password = passwordController.text;
     if (password.isEmpty) {
       isWrongUser.value = true;
-      errorPassword.value = localizations.pleasePassword;
+      errorPassword.value = "Please enter a valid password";
     } else if (password.length < 2) {
       isWrongUser.value = true;
-      errorPassword.value = localizations.pleaseValidPassword;
+      errorPassword.value = "Please enter a valid password";
     } else {
       errorPassword.value = '';
-      if(errorEmail.value.isEmpty){
+      if (errorEmail.value.isEmpty) {
         isWrongUser.value = false;
       }
-    }*/
+    }
+  }
+
+  void checkLoginType(LoginType val){
+    loginType.value = val;
+    changeDisplayName();
+  }
+  void changeDisplayName(){
+    if(loginType.value == LoginType.guardian){
+      displayNameLeft.value = LoginType.coordinator;
+      displayNameRight.value = LoginType.driver;
+    }
+    else if(loginType.value == LoginType.coordinator){
+      displayNameLeft.value = LoginType.guardian;
+      displayNameRight.value = LoginType.driver;
+    }
+    else{
+      displayNameLeft.value = LoginType.guardian;
+      displayNameRight.value = LoginType.coordinator;
+    }
+  }
+
+  void login(){
+    Get.off(MapView());
   }
 
 
-
-
+}

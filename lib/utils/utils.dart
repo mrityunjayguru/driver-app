@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -102,7 +100,7 @@ class Utils{
   }
 
   static void getSnackbar(String title, String message){
-    Get.snackbar(title, message, backgroundColor: AppColors.black, colorText: AppColors.selextedindexcolor,snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(title, message, backgroundColor: AppColors.black, colorText: AppColors.primaryColor,snackPosition: SnackPosition.BOTTOM);
   }
 
   static String toStringAsFixed({String? data}){

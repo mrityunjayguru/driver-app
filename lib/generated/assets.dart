@@ -26,6 +26,10 @@ class Assets {
   static const String fontsSFProTextRegular = 'assets/fonts/SF-Pro-Text-Regular.ttf';
   static const String fontsSFProTextSemibold = 'assets/fonts/SF-Pro-Text-Semibold.ttf';
   static const String iconIcon = 'assets/icon/icon.png';
-  static const String svgLogo = 'assets/images/svg/logo.svg';
+  static const String svgAppIcon = 'assets/images/svg/app_icon.svg';
+  static const String svgAppLogo = 'assets/images/svg/app_logo.svg';
+  static const String svgEyeCloseIcon = 'assets/images/svg/eye_close_icon.svg';
+  static const String svgEyeOpenIcon = 'assets/images/svg/eye_open_icon.svg';
+  static const String svgIcSad = 'assets/images/svg/ic_sad.svg';
 
 }

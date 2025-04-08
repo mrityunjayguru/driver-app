@@ -31,4 +31,5 @@ abstract class _Paths {
   static const SUPPORT = '/support';
   static const FAQS = '/faqs';
   static const ABOUT_US = '/about_us';
+  static const MAP = '/map';
 }

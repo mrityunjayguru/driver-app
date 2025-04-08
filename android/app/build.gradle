@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.rrp.route_roster_pro"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
