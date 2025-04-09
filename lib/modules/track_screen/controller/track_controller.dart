@@ -75,7 +75,7 @@ class TrackController extends GetxController {
     ).listen((Position position) async {
       debugPrint("position ${position.speed}");
       speed.value = (position.speed * 3.6)
-          .toStringAsFixed(2)
+          .round().toInt()
           .toString(); // Convert m/s to km/h
       currentLocation.value = LatLng(position.latitude, position.longitude);
       markers.value = [

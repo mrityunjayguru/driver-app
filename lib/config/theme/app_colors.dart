@@ -5,30 +5,32 @@ class AppColors {
   static const Color primaryColor = Color(0xFFFA6400);
 
   ///GRAY SCALE
-  static const Color darkBlack = Color(0xff141314);
-  static const Color black = Color(0xff171717);
-  static Color blackLight = const Color(0xff3a3a3c);
+
+  static const Color black = Color(0xff2C2C2C);
+
 
 
 
   //BACKGROUND
   static Color backgroundDark = const Color(0xffebebea);
   static Color colorFCFCFC = const Color(0xfffcfcfc);
+  static Color color2C2C2C = const Color(0xff2C2C2C);
   static Color backgroundColor = const Color(0xffF0F4FD);
 
 
-  static Color color_f6f8fc = const Color(0xffF6f8fc);
-  static Color color_f0f4fd = const Color(0xfff0f4fd);
+  static Color colorF6f8fc = const Color(0xffF6f8fc);
   static Color colorD6D6D9 = const Color(0xffD6D6D9);
   static Color color9f9ea2 = const Color(0xff9f9ea2);
   static Color color949495 = const Color(0xff949495);
+  static Color color5BE762 = const Color(0xff5BE762);
+  static Color colorF3434E = const Color(0xffF3434E);
+  static Color color05A319 = const Color(0xff05A319);
 
 
   //DANGER
   static Color danger = const Color(0xffe76565);
   static Color dangerDark = const Color(0xffa92e2e);
   static Color dangerLight = const Color(0xffffeaea);
-  static Color color_e23226 = const Color(0xffe23226);
 
   //WARNING
   static Color warning = const Color(0xffFFD02C);

@@ -30,6 +30,10 @@ class Assets {
   static const String svgAppLogo = 'assets/images/svg/app_logo.svg';
   static const String svgEyeCloseIcon = 'assets/images/svg/eye_close_icon.svg';
   static const String svgEyeOpenIcon = 'assets/images/svg/eye_open_icon.svg';
+  static const String svgIcBack = 'assets/images/svg/ic_back.svg';
+  static const String svgIcCall = 'assets/images/svg/ic_call.svg';
   static const String svgIcSad = 'assets/images/svg/ic_sad.svg';
+  static const String svgLeftArr = 'assets/images/svg/left_arr.svg';
+  static const String svgRightArr = 'assets/images/svg/right_arr.svg';
 
 }
