@@ -2,6 +2,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../utils/common_import.dart';
+import '../../../utils/enums.dart';
 import '../../../utils/utils.dart';
 
 class TrackController extends GetxController {
@@ -15,6 +16,66 @@ class TrackController extends GetxController {
   late GoogleMapController mapController;
 
   RxBool showLoader = false.obs;
+
+  // var routeList = <RouteData>[].obs;
+  List<RouteData> routeList = [
+    RouteData(
+      name: 'Morning Route 1',
+      noStop: '10',
+      noStudents: '45',
+      noCoord: '3',
+      startTime: '07:00',
+      endTime: '08:00',
+      date: '2025-04-10',
+      vNo: 'MH12AB1234',
+      typeVehicle: 'Bus',
+      driverName: 'John Doe',
+      teacherName: 'Ms. Smith',
+      attendantName: 'Raj',tripType: TripType.upcoming
+    ),
+    RouteData(
+      name: 'Morning Route 2',
+      noStop: '8',
+      noStudents: '40',
+      noCoord: '2',
+      startTime: '07:15',
+      endTime: '08:10',
+      date: '2025-04-10',
+      vNo: 'MH12CD5678',
+      typeVehicle: 'Van',
+      driverName: 'Ali Khan',
+      teacherName: 'Mr. Thomas',
+      attendantName: 'Sneha', tripType: TripType.scheduled,
+    ),
+    RouteData(
+      name: 'Evening Route 1',
+      noStop: '12',
+      noStudents: '50',
+      noCoord: '4',
+      startTime: '15:00',
+      endTime: '16:00',
+      date: '2025-04-10',
+      vNo: 'MH12EF9012',
+      typeVehicle: 'Bus',
+      driverName: 'Vinod Kumar',
+      teacherName: 'Mrs. Fernandez',
+      attendantName: 'Aarti',tripType: TripType.completed
+    ),
+    RouteData(
+      name: 'Evening Route 2',
+      noStop: '9',
+      noStudents: '38',
+      noCoord: '2',
+      startTime: '15:15',
+      endTime: '16:10',
+      date: '2025-04-10',
+      vNo: 'MH12GH3456',
+      typeVehicle: 'Mini Bus',
+      driverName: 'Ravi Patil',
+      teacherName: 'Mr. Mehta',
+      attendantName: 'Pooja',tripType: TripType.completed
+    ),
+  ];
 
   @override
   void onInit() {
@@ -107,3 +168,40 @@ class TrackController extends GetxController {
     });
   }
 }
+
+
+
+class RouteData {
+  String name;
+  String noStop;
+  String noStudents;
+  String noCoord;
+  String startTime;
+  String endTime;
+  String date;
+  String vNo;
+  String typeVehicle;
+  String driverName;
+  String teacherName;
+  String attendantName;
+  TripType tripType;
+
+  RouteData({
+    required this.name,
+    required this.noStop,
+    required this.noStudents,
+    required this.noCoord,
+    required this.startTime,
+    required this.endTime,
+    required this.date,
+    required this.vNo,
+    required this.typeVehicle,
+    required this.driverName,
+    required this.teacherName,
+    required this.attendantName,
+    required this.tripType,
+  });
+
+
+}
+

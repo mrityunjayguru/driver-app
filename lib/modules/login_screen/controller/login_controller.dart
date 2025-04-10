@@ -4,6 +4,7 @@ import 'package:route_roster_pro/modules/track_screen/view/map_view.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/common_import.dart';
 import '../../../utils/enums.dart';
+import '../../track_screen/view/route_list.dart';
 
 class LoginController extends GetxController {
   TextEditingController emailController = TextEditingController();
@@ -68,7 +69,7 @@ class LoginController extends GetxController {
   }
 
   void login(){
-    Get.off(MapView());
+    Get.off(RouteListView());
   }
 
 

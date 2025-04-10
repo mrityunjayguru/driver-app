@@ -143,7 +143,7 @@ class Utils {
   Widget topBar(String text, {bool backIcon = false, String? textRight}) {
     return Builder(builder: (context) {
       return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+        margin: const EdgeInsets.symmetric(horizontal: 12),
         padding: const EdgeInsets.all(7),
         decoration: commonDecoration(),
         child: Row(children: [
@@ -154,16 +154,17 @@ class Utils {
                 .display18W500
                 .copyWith(color: AppColors.color2C2C2C),
           ),
-          if (backIcon) SvgPicture.asset(Assets.svgIcBack),
+          const Spacer(),
+          if (backIcon) InkWell(onTap:(){Get.back();},child: SvgPicture.asset(Assets.svgIcBack)),
           if (textRight != null)
             Text(
               textRight,
               style: AppTextStyles(context)
                   .display18W500
                   .copyWith(color: AppColors.primaryColor),
-            )
+            ).paddingOnly(right: 10)
         ]),
-      ).paddingOnly(top: 30);
+      ).paddingOnly(top: 46);
     });
   }
 
@@ -173,13 +174,69 @@ class Utils {
         borderRadius: BorderRadius.circular(AppSizes.radius_4),
         boxShadow: shadow
             ? [
-                const BoxShadow(
-                  color: Color(0x66000000), // Equivalent to #00000040
-                  offset: Offset(0, 1), // x: 0px, y: 1px
+                 BoxShadow(
+                  color: const Color(0xFF000000).withOpacity(0.25), // Equivalent to #00000040
+                  offset: const Offset (0, 1), // x: 0px, y: 1px
                   blurRadius: 8, // blur radius
                   spreadRadius: 0, // no spread
                 ),
               ]
             : null);
   }
+
+
+  Widget dottedLine({
+    double width = double.infinity,
+    double height = 1.0,
+    double thickness = 0.5,
+    Color? color,
+    double dotSpacing = 4.0,
+  }) {
+    return SizedBox(
+      width: width,
+      height: height,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          int dotCount = (constraints.maxWidth / (dotSpacing * 2)).floor();
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(dotCount, (_) {
+              return Container(
+                width: dotSpacing,
+                height: thickness,
+                color: color ?? AppColors.color949495,
+              );
+            }),
+          );
+        },
+      ),
+    );
+  }
+  Widget verticalDottedLine({
+    double height = 42,
+    double thickness = 0.5,
+    Color? color,
+    double dotSpacing = 4.0,
+  }) {
+    return SizedBox(
+      height: height,
+      width: thickness,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          int dotCount = (constraints.maxHeight / (dotSpacing * 1.5)).floor();
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(dotCount, (_) {
+              return Container(
+                width: thickness,
+                height: dotSpacing,
+                color: color ?? AppColors.color949495,
+              );
+            }),
+          );
+        },
+      ),
+    );
+  }
+
 }

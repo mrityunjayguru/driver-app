@@ -30,11 +30,11 @@ class AppPages {
       page: () => BottomBarView(),
       binding: BottomNavigationBarBinding(),
     ),
-    GetPage(
+    /*GetPage(
       name: _Paths.MAP,
       page: () => MapView(),
       binding: TrackBinding(),
     ),
-
+*/
   ];
 }

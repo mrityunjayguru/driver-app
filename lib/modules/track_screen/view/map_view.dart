@@ -9,38 +9,43 @@ import '../../../utils/common_import.dart';
 import '../controller/track_controller.dart';
 
 class MapView extends StatelessWidget {
-  MapView({super.key});
+  MapView({super.key, required this.data});
 
+  RouteData data;
   final controller = Get.isRegistered<TrackController>()
       ? Get.find<TrackController>() // Find if already registered
       : Get.put(TrackController());
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Obx(
-          () => GoogleMap(
-            zoomControlsEnabled: false,
-            mapType: MapType.normal,
-            onMapCreated: (mapCon) {
-              controller.mapController = mapCon;
-              controller.showLoader.value = false;
-            },
-            initialCameraPosition: CameraPosition(
-              target: controller.currentLocation.value,
-              zoom: 7,
+    return PopScope(
+      canPop: false,
+      child: Stack(
+        children: [
+          Obx(
+            () => GoogleMap(
+              zoomControlsEnabled: false,
+              mapType: MapType.normal,
+              onMapCreated: (mapCon) {
+                controller.mapController = mapCon;
+                controller.showLoader.value = false;
+              },
+              initialCameraPosition: CameraPosition(
+                target: controller.currentLocation.value,
+                zoom: 7,
+              ),
+              markers: Set<Marker>.of(controller.markers),
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
+              mapToolbarEnabled: false,
+              minMaxZoomPreference: const MinMaxZoomPreference(5, 19),
             ),
-            markers: Set<Marker>.of(controller.markers),
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            mapToolbarEnabled: false,
-            minMaxZoomPreference: const MinMaxZoomPreference(5, 19),
           ),
-        ),
-        topBar(context),
-        Positioned.fill(bottom:0,top:context.height*0.71,child: bottomBar(context))
-      ],
+          topBar(context),
+          Positioned.fill(
+              bottom: 0, top: context.height * 0.71, child: bottomBar(context))
+        ],
+      ),
     );
   }
 
@@ -66,7 +71,7 @@ class MapView extends StatelessWidget {
                     style: AppTextStyles(context).display12W500,
                   ),
                   Text(
-                    "70",
+                    "20",
                     style: AppTextStyles(context)
                         .display24W500
                         .copyWith(color: AppColors.primaryColor),
@@ -110,31 +115,33 @@ class MapView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Obx(()=>
+           Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                border: Border.all(color:Utils.parseDouble(data: controller.speed.value) == 0 ? AppColors.color949495 : (Utils.parseDouble(data: controller.speed.value) <= 20) ? AppColors.color05A319:AppColors.colorF3434E, width: 3)),
+            child: Column(
+              children: [
+                Text(
+                  Utils.parseDouble(data: controller.speed.value) == 0 ? "--" : controller.speed.value,
+                  style: AppTextStyles(context)
+                      .display16W600
+                      .copyWith(color: AppColors.color949495),
+                ),
+                Text(
+                  "KM/P",
+                  style: AppTextStyles(context)
+                      .display8W400
+                      .copyWith(color: AppColors.color949495),
+                ),
+              ],
+            ),
+          ).paddingSymmetric(horizontal: 12, vertical: 12),
+        ),
         Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.color949495, width: 3)),
-          child: Column(
-            children: [
-              Text(
-                controller.speed.value,
-                style: AppTextStyles(context)
-                    .display16W600
-                    .copyWith(color: AppColors.color949495),
-              ),
-              Text(
-                "KM/P",
-                style: AppTextStyles(context)
-                    .display8W400
-                    .copyWith(color: AppColors.color949495),
-              ),
-            ],
-          ),
-        ).paddingSymmetric(horizontal: 12, vertical: 12),
-        Container(
-         constraints: BoxConstraints(maxHeight: 75, minHeight: 75),
+          constraints: const BoxConstraints(maxHeight: 75, minHeight: 75),
           width: context.width,
           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
           decoration: Utils().commonDecoration(),
@@ -152,6 +159,9 @@ class MapView extends StatelessWidget {
           children: [
             Expanded(
               child: InkWell(
+                onTap: (){
+                  Get.back();
+                },
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
@@ -173,6 +183,9 @@ class MapView extends StatelessWidget {
             ),
             Expanded(
               child: InkWell(
+                onTap: (){
+                  Get.back();
+                },
                 child: Container(
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
@@ -236,7 +249,6 @@ class MapView extends StatelessWidget {
                     .display20W500
                     .copyWith(color: AppColors.primaryColor),
               ),
-
             ],
           ).paddingSymmetric(horizontal: 10),
         ),
