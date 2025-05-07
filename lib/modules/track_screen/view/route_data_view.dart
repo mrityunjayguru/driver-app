@@ -25,18 +25,20 @@ class RouteDataView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.colorF3F3F3,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Utils().topBar(data.name, backIcon: true),
-            const SizedBox(
-              height: 16,
-            ),
-            route(context),
-            listItem(context).paddingSymmetric(horizontal: 12),
-            peopleOnboard().paddingSymmetric(horizontal: 12),
-            mapView().paddingSymmetric(horizontal: 12)
-          ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Utils().topBar(data.name, backIcon: true),
+              const SizedBox(
+                height: 16,
+              ),
+              route(context),
+              listItem(context).paddingSymmetric(horizontal: 12),
+              peopleOnboard().paddingSymmetric(horizontal: 12),
+              mapView().paddingSymmetric(horizontal: 12)
+            ],
+          ),
         ),
       ),
     );
@@ -199,11 +201,11 @@ class RouteDataView extends StatelessWidget {
   }
 
   Widget mapView() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(4),
-      child: Container(
-        height: 200,
-        decoration: Utils().commonDecoration(),
+    return Container(
+      height: 200,
+      decoration: Utils().commonDecoration(),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(4),
         child: GoogleMap(
           zoomControlsEnabled: false,
           mapType: MapType.normal,

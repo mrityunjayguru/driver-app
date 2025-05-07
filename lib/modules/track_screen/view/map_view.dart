@@ -41,7 +41,7 @@ class MapView extends StatelessWidget {
               minMaxZoomPreference: const MinMaxZoomPreference(5, 19),
             ),
           ),
-          topBar(context),
+          SafeArea(child: topBar(context)),
           Positioned.fill(
               bottom: 0, top: context.height * 0.71, child: bottomBar(context))
         ],
@@ -73,7 +73,7 @@ class MapView extends StatelessWidget {
                   Text(
                     "20",
                     style: AppTextStyles(context)
-                        .display24W500
+                        .display26W500
                         .copyWith(color: AppColors.primaryColor),
                   ),
                   Text(
@@ -164,7 +164,7 @@ class MapView extends StatelessWidget {
                 },
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   decoration: Utils().commonDecoration(
                       color: AppColors.primaryColor, shadow: false),
                   child: Center(
@@ -188,7 +188,7 @@ class MapView extends StatelessWidget {
                 },
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
                   decoration: Utils()
                       .commonDecoration(color: Colors.black, shadow: false),
                   child: Center(

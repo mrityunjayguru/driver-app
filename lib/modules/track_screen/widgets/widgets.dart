@@ -13,7 +13,7 @@ Widget peopleColumn(text1, text2, Color textColor) {
           Text(
             text1,
             style:
-                AppTextStyles(context).display32W500.copyWith(color: textColor),
+                AppTextStyles(context).display27W600.copyWith(color: textColor),
           ),
           Text(
             text2,

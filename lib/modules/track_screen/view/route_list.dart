@@ -19,17 +19,19 @@ class RouteListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.colorF3F3F3,
-      body: Column(
-        children: [
-          Utils().topBar("Today's Route Schedule", textRight: "4"),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemBuilder: (context, index) => listItem(context, index),
-              itemCount: controller.routeList.length,
-            ).paddingSymmetric(horizontal: 12),
-          )
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Utils().topBar("Today's Route Schedule", textRight: "4"),
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) => listItem(context, index),
+                itemCount: controller.routeList.length,
+              ).paddingSymmetric(horizontal: 12).paddingOnly(top: 18),
+            )
+          ],
+        ),
       ),
     );
   }

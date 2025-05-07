@@ -155,7 +155,7 @@ class Utils {
                 .copyWith(color: AppColors.color2C2C2C),
           ),
           const Spacer(),
-          if (backIcon) InkWell(onTap:(){Get.back();},child: SvgPicture.asset(Assets.svgIcBack)),
+          if (backIcon) InkWell(onTap:(){Get.back();},child: SvgPicture.asset(Assets.svgIcBack, width: 24, height: 24,).paddingOnly(right: 5)),
           if (textRight != null)
             Text(
               textRight,
@@ -164,7 +164,7 @@ class Utils {
                   .copyWith(color: AppColors.primaryColor),
             ).paddingOnly(right: 10)
         ]),
-      ).paddingOnly(top: 46);
+      ).paddingOnly(top: 10);
     });
   }
 

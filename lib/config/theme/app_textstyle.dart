@@ -88,6 +88,8 @@ class AppTextStyles {
   late final TextStyle display24W500;
   late final TextStyle display24W600;
   late final TextStyle display24W700;
+  late final TextStyle display26W500;
+  late final TextStyle display27W600;
   late final TextStyle display30W400;
   late final TextStyle display30W700;
   late final TextStyle display32W500;
@@ -461,6 +463,18 @@ class AppTextStyles {
           color: AppColors.black,
           fontWeight: FontWeight.w700,
         );
+    display26W500 = Theme.of(context!).textTheme.displayLarge!.copyWith(
+      fontFamily: BaseFonts.SFPro,
+      fontSize: 26,
+      color: AppColors.black,
+      fontWeight: FontWeight.w500,
+    );
+    display27W600 = Theme.of(context!).textTheme.displayLarge!.copyWith(
+      fontFamily: BaseFonts.SFPro,
+      fontSize: 27,
+      color: AppColors.black,
+      fontWeight: FontWeight.w600,
+    );
     display36W700 = Theme.of(context!).textTheme.displayLarge!.copyWith(
           fontFamily: BaseFonts.SFPro,
           fontSize: 30,
