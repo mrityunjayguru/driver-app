@@ -1,9 +1,8 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../../utils/common_import.dart';
-import '../../../utils/enums.dart';
-import '../../../utils/utils.dart';
+import '../../../../utils/common_import.dart';
+import '../../../../utils/enums.dart';
+import '../../../../utils/utils.dart';
 
 class TrackController extends GetxController {
   var markers = <Marker>[].obs;

@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import '../../../config/theme/app_colors.dart';
 import '../../../generated/assets.dart';
 import '../../../routes/app_pages.dart';
-import '../../login_screen/view/login_screen.dart';
-import '../../track_screen/view/map_view.dart';
 import '../controller/splash_controller.dart';
 
 

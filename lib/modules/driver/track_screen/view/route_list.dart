@@ -1,10 +1,10 @@
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
-import 'package:route_roster_pro/modules/track_screen/view/route_data_view.dart';
+import 'package:route_roster_pro/modules/driver/track_screen/view/route_data_view.dart';
 import 'package:route_roster_pro/utils/utils.dart';
 
-import '../../../config/theme/app_colors.dart';
-import '../../../utils/common_import.dart';
-import '../../../utils/enums.dart';
+import '../../../../config/theme/app_colors.dart';
+import '../../../../utils/common_import.dart';
+import '../../../../utils/enums.dart';
 import '../controller/track_controller.dart';
 import '../widgets/widgets.dart';
 

@@ -1,121 +1,120 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
+import 'package:route_roster_pro/config/theme/app_textstyle.dart';
+
+import '../../../config/app_sizer.dart';
+import '../../../config/theme/app_colors.dart';
+import '../../../generated/assets.dart';
 import '../controller/bottom_bar_controller.dart';
 
 class BottomBarView extends StatelessWidget {
   BottomBarView({super.key});
+
   final BottomBarController controller = Get.put(BottomBarController());
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Obx(
-            () {
+        () {
           final int currentIndex = controller.selectedIndex.value;
 
-          return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              // Determine direction based on index comparison
-              final Offset beginOffset =
-              (controller.previousIndex.value > currentIndex)
-                  ? const Offset(-1, 0) // Slide in from the left
-                  : const Offset(1, 0); // Slide in from the right
+          return Stack(
+            children: [
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  // Determine direction based on index comparison
+                  final Offset beginOffset =
+                      (controller.previousIndex.value > currentIndex)
+                          ? const Offset(-1, 0) // Slide in from the left
+                          : const Offset(1, 0); // Slide in from the right
 
-              return SlideTransition(
-                position: Tween<Offset>(
-                  begin: beginOffset,
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              );
-            },
-           /* child: KeyedSubtree(
-              // Assign a unique key for each screen
-              key: ValueKey<int>(currentIndex),
-              child: controller.screens[currentIndex],
-            ),*/
+                  return SlideTransition(
+                    position: Tween<Offset>(
+                      begin: beginOffset,
+                      end: Offset.zero,
+                    ).animate(animation),
+                    child: child,
+                  );
+                },
+                 child: KeyedSubtree(
+                  // Assign a unique key for each screen
+                  key: ValueKey<int>(currentIndex),
+                  child: controller.screens[currentIndex],
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Obx(
+                          () => Transform.translate(
+                        offset: Offset(0, 0.4),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                                child: controller.selectedIndex.value == 0
+                                    ? SvgPicture.asset(Assets.svgNotchBottomBar)
+                                    : SizedBox.shrink()),
+                            Expanded(
+                                child: controller.selectedIndex.value == 1
+                                    ? SvgPicture.asset(Assets.svgNotchBottomBar)
+                                    : SizedBox.shrink()),
+                            Expanded(
+                                child: controller.selectedIndex.value == 2
+                                    ? SvgPicture.asset(Assets.svgNotchBottomBar)
+                                    : SizedBox.shrink())
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(AppSizes.radius_10),
+                          color: AppColors.black),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Obx(() => bottomTabs(
+                            context: context,
+                            img: Assets.svgProfileIcon,
+                            title: "Profile",
+                            isSelected: controller.selectedIndex.value == 0,
+                            onTap: () => controller.updateIndex(0),
+                          )),
+                          Obx(() => bottomTabs(
+                            context: context,
+                            img: Assets.svgBusStatusIcon,
+                            title: "Bus Status",
+                            isSelected: controller.selectedIndex.value == 1,
+                            onTap: () => controller.updateIndex(1),
+                          )),
+                          Obx(() => bottomTabs(
+                            context: context,
+                            img: Assets.svgSettingsIcon,
+                            title: "Settings",
+                            isSelected: controller.selectedIndex.value == 2,
+                            onTap: () => controller.updateIndex(2),
+                          )),
+                        ],
+                      ),
+                    ),
+                  ],
+                ).paddingOnly(bottom: 16, left: 13, right: 13),
+              )
+            ],
+
           );
         },
       ),
-      bottomNavigationBar: Container(
-        // color: AppColors.black,
-        height: MediaQuery.of(context).size.height < 670 ? 13.h : 12.h, // Increase height for smaller screens
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-           /* Obx(() => bottomTabs(
-              context: context,
-              img: Assets.images.svg.btMenu,
-              title: localizations.settings,
-              isSelected: controller.selectedIndex.value == 0,
-              onTap: () => controller.updateIndex(0),
-            )),
-            Obx(() => bottomTabs(
-              context: context,
-              img: Assets.images.svg.btNotification,
-              title: localizations.alerts,
-              isSelected: controller.selectedIndex.value == 1,
-              onTap: () => controller.updateIndex(1),
-            )),
-            Column(
-              children: [
-                Obx(
-                      () => InkWell(
-                    onTap: () {
-                      controller.updateIndex(2);
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      height: 6.h,
-                      width: 24.w,
-                      decoration: BoxDecoration(
-                        color: controller.selectedIndex.value == 2
-                            ? AppColors.selextedindexcolor
-                            : AppColors.whiteOff,
-                        borderRadius: BorderRadius.circular(AppSizes.radius_50),
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          Assets.images.svg.btTrackRoute,
-                          width: 35,
-                          height: 35,
-                        ),
-                      ),
-                    ).paddingOnly(top: 6, bottom: 6),
-                  ),
-                ),
-                Text(
-                  localizations.trackRoute,
-                  style: AppTextStyles(context)
-                      .display11W400
-                      .copyWith(color: AppColors.whiteOff),
-                ),
-              ],
-            ),
-            Obx(() => bottomTabs(
-              context: context,
-              img: Assets.images.svg.btSteeringWheel,
-              title: localizations.vehicle,
-              isSelected: controller.selectedIndex.value == 3,
-              onTap: () => controller.updateIndex(3),
-            )),
-            Obx(() => bottomTabs(
-              context: context,
-              img: Assets.images.svg.btCar,
-              title: localizations.profile,
-              isSelected: controller.selectedIndex.value == 4,
-              onTap: () => controller.updateIndex(4),
-            )),*/
-          ],
-        ).paddingOnly(bottom: 20),
-      ),
     );
   }
-
-
 
   Widget bottomTabs({
     required BuildContext context,
@@ -124,24 +123,32 @@ class BottomBarView extends StatelessWidget {
     required String title,
     required VoidCallback onTap, // Add onTap callback
   }) {
-    return GestureDetector(
-      // Wrap with GestureDetector for tap detection
-      onTap: onTap,
-      child: Column(
-        children: [
-        /*  CircleAvatar(
-            backgroundColor:
-                isSelected ? AppColors.selextedindexcolor : AppColors.whiteOff,
-            radius: 3.h,
-            child: SvgPicture.asset(img, width: img == Assets.images.svg.btMenu ? 25 : 31, height:  img == Assets.images.svg.btMenu ?  25 : 31,),
-          ).paddingOnly(top: 6, bottom: 6),
-          Text(
-            title,
-            style: AppTextStyles(context)
-                .display11W300
-                .copyWith(color: AppColors.whiteOff),
-          ),*/
-        ],
+    return Expanded(
+      child: Transform.translate(
+        offset: isSelected? Offset(0,-16): Offset(0, 0),
+        child: GestureDetector(
+          // Wrap with GestureDetector for tap detection
+          onTap: onTap,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              SvgPicture.asset(
+                img,
+                width: isSelected ? 30 : 26,
+                height: isSelected ? 30 : 26,
+              ),
+              if (isSelected)
+                Transform.translate(
+                    offset: Offset(0,24),
+                    child: Text(
+                      title,
+                      style: AppTextStyles(context)
+                          .display12W500
+                          .copyWith(color: AppColors.white),
+                    ).paddingOnly(top: 5))
+            ],
+          ).paddingSymmetric(vertical: 12),
+        ),
       ),
     );
   }

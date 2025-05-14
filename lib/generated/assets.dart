@@ -26,14 +26,26 @@ class Assets {
   static const String fontsSFProTextRegular = 'assets/fonts/SF-Pro-Text-Regular.ttf';
   static const String fontsSFProTextSemibold = 'assets/fonts/SF-Pro-Text-Semibold.ttf';
   static const String iconIcon = 'assets/icon/icon.png';
+  static const String pngSchoolIcon = 'assets/images/png/school_icon.png';
+  static const String svgActiveBellIcon = 'assets/images/svg/active_bell_icon.svg';
   static const String svgAppIcon = 'assets/images/svg/app_icon.svg';
   static const String svgAppLogo = 'assets/images/svg/app_logo.svg';
+  static const String svgArrow = 'assets/images/svg/arrow.svg';
+  static const String svgBellIcon = 'assets/images/svg/bell_icon.svg';
+  static const String svgBoyIcon = 'assets/images/svg/boy_icon.svg';
+  static const String svgBusIcon = 'assets/images/svg/bus_icon.svg';
+  static const String svgBusStatusIcon = 'assets/images/svg/bus_status_icon.svg';
+  static const String svgBusStopIcon = 'assets/images/svg/bus_stop_icon.svg';
   static const String svgEyeCloseIcon = 'assets/images/svg/eye_close_icon.svg';
   static const String svgEyeOpenIcon = 'assets/images/svg/eye_open_icon.svg';
+  static const String svgGirlIcon = 'assets/images/svg/girl_icon.svg';
   static const String svgIcBack = 'assets/images/svg/ic_back.svg';
   static const String svgIcCall = 'assets/images/svg/ic_call.svg';
   static const String svgIcSad = 'assets/images/svg/ic_sad.svg';
   static const String svgLeftArr = 'assets/images/svg/left_arr.svg';
+  static const String svgNotchBottomBar = 'assets/images/svg/notch_bottom_bar.svg';
+  static const String svgProfileIcon = 'assets/images/svg/profile_icon.svg';
   static const String svgRightArr = 'assets/images/svg/right_arr.svg';
+  static const String svgSettingsIcon = 'assets/images/svg/settings_icon.svg';
 
 }

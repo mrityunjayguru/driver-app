@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:route_roster_pro/modules/login_screen/view/login_screen.dart';
-import 'package:route_roster_pro/modules/track_screen/view/map_view.dart';
 
 import '../bindings/bindings.dart';
 import '../modules/bottom_screen/view/bottom_bar_view.dart';

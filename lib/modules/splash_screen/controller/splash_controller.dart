@@ -1,10 +1,6 @@
 import 'package:get/get.dart';
-import 'package:route_roster_pro/modules/login_screen/view/login_screen.dart';
-import 'package:route_roster_pro/modules/login_screen/view/login_screen.dart';
-
 import '../../../routes/app_pages.dart';
 import '../../../utils/app_prefrance.dart';
-import '../../track_screen/view/map_view.dart';
 
 class SplashController extends GetxController {
   @override

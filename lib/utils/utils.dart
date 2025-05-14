@@ -140,7 +140,7 @@ class Utils {
     return FilteringTextInputFormatter.digitsOnly;
   }
 
-  Widget topBar(String text, {bool backIcon = false, String? textRight}) {
+  Widget topBar(String text, {bool backIcon = false, String? textRight, String? rightIcon, VoidCallback? onTap}) {
     return Builder(builder: (context) {
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -162,7 +162,9 @@ class Utils {
               style: AppTextStyles(context)
                   .display18W500
                   .copyWith(color: AppColors.primaryColor),
-            ).paddingOnly(right: 10)
+            ).paddingOnly(right: 10),
+          if (rightIcon != null)
+            InkWell(onTap:onTap,child: SvgPicture.asset(rightIcon, width: 24, height: 24,).paddingOnly(right: 5))
         ]),
       ).paddingOnly(top: 10);
     });

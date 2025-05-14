@@ -3,9 +3,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
 import 'package:route_roster_pro/utils/utils.dart';
 
-import '../../../config/theme/app_colors.dart';
-import '../../../generated/assets.dart';
-import '../../../utils/common_import.dart';
+import '../../../../config/theme/app_colors.dart';
+import '../../../../generated/assets.dart';
+import '../../../../utils/common_import.dart';
 import '../controller/track_controller.dart';
 
 class MapView extends StatelessWidget {

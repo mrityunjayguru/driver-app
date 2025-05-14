@@ -19,3 +19,15 @@ enum TripType {
 
   const TripType(this.name, this.value);
 }
+
+
+enum BusStatus {
+  school('At School', 'At School'),
+  transit('In Transit', 'In Transit'),
+  completed('Completed', 'Completed');
+
+  final String name;
+  final String value;
+
+  const BusStatus(this.name, this.value);
+}

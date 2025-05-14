@@ -1,9 +1,9 @@
 import 'package:sizer/sizer.dart';
 
-import '../../../config/theme/app_colors.dart';
-import '../../../config/theme/app_textstyle.dart';
-import '../../../utils/common_import.dart';
-import '../../../utils/utils.dart';
+import '../../../../config/theme/app_colors.dart';
+import '../../../../config/theme/app_textstyle.dart';
+import '../../../../utils/common_import.dart';
+import '../../../../utils/utils.dart';
 
 Widget peopleColumn(text1, text2, Color textColor) {
   return Expanded(

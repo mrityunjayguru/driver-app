@@ -1,21 +1,21 @@
 
 import 'package:get/get.dart';
+import 'package:route_roster_pro/modules/guardian/view/bus_status_view.dart';
+import 'package:route_roster_pro/modules/guardian/view/profile_view.dart';
+import 'package:route_roster_pro/modules/guardian/view/settings_view.dart';
+
+import '../../../utils/common_import.dart';
 
 class BottomBarController extends GetxController {
 
-  var selectedIndex = 2.obs;
-  var previousIndex = 2.obs;
+  var selectedIndex = 1.obs;
+  var previousIndex = 1.obs;
 
   void updateIndex(int index) {
+
     if(index==2){
 
 
-
-    }
-    if(index==3){
-
-    }
-    if(index==4) {
 
     }
     previousIndex.value = selectedIndex.value;
@@ -24,11 +24,9 @@ class BottomBarController extends GetxController {
 
 
 
-/*  List<Widget> screens = [
-    SettingView(),
-    AlertView(),
-    TrackRouteView(),
-    VehicalesView(),
-    ProfileView()
-  ];*/
+  List<Widget> screens = [
+    SettingsView(),
+    BusStatusView(),
+    ProfileView(),
+  ];
 }

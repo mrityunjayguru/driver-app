@@ -3,11 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../config/theme/app_colors.dart';
-import '../../../config/theme/app_textstyle.dart';
-import '../../../generated/assets.dart';
-import '../../../utils/enums.dart';
-import '../../../utils/utils.dart';
+import '../../../../config/theme/app_colors.dart';
+import '../../../../config/theme/app_textstyle.dart';
+import '../../../../generated/assets.dart';
+import '../../../../utils/enums.dart';
+import '../../../../utils/utils.dart';
 import '../controller/track_controller.dart';
 import '../widgets/widgets.dart';
 import 'map_view.dart';
