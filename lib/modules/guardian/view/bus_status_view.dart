@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:route_roster_pro/config/app_sizer.dart';
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
@@ -26,7 +28,7 @@ class BusStatusView extends StatelessWidget {
             children: [
               Container(
                 color: AppColors.colorFEF1D6,
-                height: MediaQuery.of(context).size.height * 0.35,
+                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.35 :  MediaQuery.of(context).size.height * 0.375,
                 width: double.infinity,
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(

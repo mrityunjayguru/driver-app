@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:route_roster_pro/config/app_sizer.dart';
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
@@ -25,7 +27,7 @@ class ProfileView extends StatelessWidget {
             children: [
               Container(
                 color: AppColors.colorFEF1D6,
-                height: MediaQuery.of(context).size.height * 0.29,
+                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.29 :  MediaQuery.of(context).size.height * 0.315,
                 width: double.infinity,
               ),
               Expanded(
