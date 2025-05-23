@@ -21,8 +21,7 @@ class SplashView extends StatelessWidget {
         child: InkWell(
           onTap: () {
             Get.offNamed(Routes.LOGIN);
-            // Get.to(()=> LoginView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
-            // Get.toNamed(Routes.LOGIN);
+
           },
           child: SvgPicture.asset(Assets.svgAppLogo),
         ),

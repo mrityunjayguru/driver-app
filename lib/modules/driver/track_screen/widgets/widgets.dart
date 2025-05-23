@@ -5,23 +5,28 @@ import '../../../../config/theme/app_textstyle.dart';
 import '../../../../utils/common_import.dart';
 import '../../../../utils/utils.dart';
 
-Widget peopleColumn(text1, text2, Color textColor) {
+Widget peopleColumn(text1, text2, Color textColor, {VoidCallback? callback}) {
   return Expanded(
     child: Builder(builder: (context) {
-      return Column(
-        children: [
-          Text(
-            text1,
-            style:
-                AppTextStyles(context).display27W600.copyWith(color: textColor),
-          ),
-          Text(
-            text2,
-            style: AppTextStyles(context)
-                .display14W400
-                .copyWith(color: AppColors.color1E1E1E),
-          )
-        ],
+      return InkWell(
+        onTap: (){
+          if(callback!=null)callback();
+        },
+        child: Column(
+          children: [
+            Text(
+              text1,
+              style:
+                  AppTextStyles(context).display27W600.copyWith(color: textColor),
+            ),
+            Text(
+              text2,
+              style: AppTextStyles(context)
+                  .display14W400
+                  .copyWith(color: AppColors.color1E1E1E),
+            )
+          ],
+        ),
       );
     }),
   );

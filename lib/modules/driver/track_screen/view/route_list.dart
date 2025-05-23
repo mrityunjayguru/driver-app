@@ -40,9 +40,7 @@ class RouteListView extends StatelessWidget {
     RouteData data = controller.routeList[index];
     return InkWell(
       onTap: () {
-        Get.to(() => RouteDataView(data : data),
-            transition: Transition.upToDown,
-            duration: const Duration(milliseconds: 300));
+        Utils().navigate(RouteDataView(data : data));
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 9),

@@ -1,6 +1,7 @@
 
 import 'package:route_roster_pro/modules/bottom_screen/view/bottom_bar_view.dart';
 
+import '../../../utils/app_prefrance.dart';
 import '../../../utils/common_import.dart';
 import '../../../utils/enums.dart';
 import '../../driver/track_screen/view/route_list.dart';
@@ -67,12 +68,15 @@ class LoginController extends GetxController {
     }
   }
 
-  void login(){
+  void login() async {
+
+    await AppPreference.addStringToSF(AppPreference.loginType, loginType.value.name);
+
     if(loginType.value == LoginType.guardian){
       Get.off(BottomBarView());
     }
     else if(loginType.value == LoginType.coordinator){
-      Get.off(RouteListView());
+      Get.off(BottomBarView());
     }
     else{
       Get.off(RouteListView());

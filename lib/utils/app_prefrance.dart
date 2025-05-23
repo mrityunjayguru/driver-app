@@ -15,6 +15,7 @@ class AppPreference {
   static const String refreshTokenKey = 'refresh_token';
   static const String attemptCountKey = 'attemptCount';
   static const String alertPreferences = 'alert_preferences';
+  static const String loginType = 'login_type';
 
   // Save the access token
   static Future<void> saveToken(String token) async {

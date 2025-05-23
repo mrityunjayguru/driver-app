@@ -8,7 +8,9 @@ class StudentBusStatus {
   final String pickupTime;
   final String dropTime;
   final bool gender;
-  final String avatar; // Optional: if you want to use image path later
+  final String avatar;
+  final bool cancelled;
+  final String schoolName;
 
   StudentBusStatus({
     required this.name,
@@ -21,5 +23,7 @@ class StudentBusStatus {
     required this.dropTime,
     required this.gender,
     this.avatar = '',
+    this.cancelled = false,
+    this.schoolName = '',
   });
 }

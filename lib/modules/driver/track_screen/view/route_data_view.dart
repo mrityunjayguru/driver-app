@@ -51,9 +51,7 @@ class RouteDataView extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: (){
-                Get.to(() => MapView(data : data),
-                    transition: Transition.upToDown,
-                    duration: const Duration(milliseconds: 300));
+                Utils().navigate(MapView(data : data));
               },
               child: Container(
                 // height: ,

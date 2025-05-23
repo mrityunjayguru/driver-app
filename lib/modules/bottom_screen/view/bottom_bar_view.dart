@@ -6,6 +6,7 @@ import 'package:route_roster_pro/config/theme/app_textstyle.dart';
 import '../../../config/app_sizer.dart';
 import '../../../config/theme/app_colors.dart';
 import '../../../generated/assets.dart';
+import '../../../utils/enums.dart';
 import '../controller/bottom_bar_controller.dart';
 
 class BottomBarView extends StatelessWidget {
@@ -39,10 +40,12 @@ class BottomBarView extends StatelessWidget {
                     child: child,
                   );
                 },
-                 child: KeyedSubtree(
+                child: KeyedSubtree(
                   // Assign a unique key for each screen
                   key: ValueKey<int>(currentIndex),
-                  child: controller.screens[currentIndex],
+                  child: controller.loginType.value == LoginType.guardian.name
+                      ? controller.screens[currentIndex]
+                      : controller.screensCoordinator[currentIndex],
                 ),
               ),
               Positioned(
@@ -53,7 +56,7 @@ class BottomBarView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Obx(
-                          () => Transform.translate(
+                      () => Transform.translate(
                         offset: Offset(0, 0.4),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -74,45 +77,62 @@ class BottomBarView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppSizes.radius_10),
-                          color: AppColors.black),
-                      child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Obx(() => bottomTabs(
-                            context: context,
-                            img: Assets.svgProfileIcon,
-                            title: "Profile",
-                            isSelected: controller.selectedIndex.value == 0,
-                            onTap: () => controller.updateIndex(0),
-                          )),
-                          Obx(() => bottomTabs(
-                            context: context,
-                            img: Assets.svgBusStatusIcon,
-                            title: "Bus Status",
-                            isSelected: controller.selectedIndex.value == 1,
-                            onTap: () => controller.updateIndex(1),
-                          )),
-                          Obx(() => bottomTabs(
-                            context: context,
-                            img: Assets.svgSettingsIcon,
-                            title: "Settings",
-                            isSelected: controller.selectedIndex.value == 2,
-                            onTap: () => controller.updateIndex(2),
-                          )),
-                        ],
+                    Obx(
+                      () => Container(
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(AppSizes.radius_10),
+                            color: AppColors.black),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            if (controller.loginType.value ==
+                                LoginType.guardian.name) ...[
+                              profileTab(context, controller.selectedIndex.value == 0, 0),
+                              busStatusTab(context, controller.selectedIndex.value == 1, 1)
+                            ] else ...[
+                              busStatusTab(context, controller.selectedIndex.value == 0, 0),
+                              profileTab(context, controller.selectedIndex.value == 1, 1)
+                            ],
+                            bottomTabs(
+                              context: context,
+                              img: Assets.svgSettingsIcon,
+                              title: "Settings",
+                              isSelected:
+                              controller.selectedIndex.value == 2,
+                              onTap: () => controller.updateIndex(2),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ).paddingOnly(bottom: 16, left: 13, right: 13),
               )
             ],
-
           );
         },
       ),
+    );
+  }
+
+  Widget profileTab(BuildContext context, bool isSelected, int index) {
+    return bottomTabs(
+      context: context,
+      img: Assets.svgProfileIcon,
+      title: "Profile",
+      isSelected: isSelected,
+      onTap: () => controller.updateIndex(index),
+    );
+  }
+
+  Widget busStatusTab(BuildContext context, bool isSelected, int index) {
+    return bottomTabs(
+      context: context,
+      img: Assets.svgBusStatusIcon,
+      title: "Bus Status",
+      isSelected: isSelected,
+      onTap: () => controller.updateIndex(index),
     );
   }
 
@@ -125,7 +145,7 @@ class BottomBarView extends StatelessWidget {
   }) {
     return Expanded(
       child: Transform.translate(
-        offset: isSelected? Offset(0,-16): Offset(0, 0),
+        offset: isSelected ? Offset(0, -16) : Offset(0, 0),
         child: GestureDetector(
           // Wrap with GestureDetector for tap detection
           onTap: onTap,
@@ -139,7 +159,7 @@ class BottomBarView extends StatelessWidget {
               ),
               if (isSelected)
                 Transform.translate(
-                    offset: Offset(0,24),
+                    offset: Offset(0, 24),
                     child: Text(
                       title,
                       style: AppTextStyles(context)

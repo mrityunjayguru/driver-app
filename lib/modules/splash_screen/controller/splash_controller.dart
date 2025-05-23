@@ -21,11 +21,7 @@ class SplashController extends GetxController {
     if (apiToken != null && apiToken.isNotEmpty) {
       // If token exists, navigate to BottomBar
 
-      // Get.to(()=> LoginView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
-
     } else {
-      // If token doesn't exist, navigate to LoginScreen
-      // Get.to(()=> LoginView(), transition: Transition.upToDown, duration: const Duration(milliseconds: 300));
 
     }
     Get.offNamed(Routes.LOGIN);

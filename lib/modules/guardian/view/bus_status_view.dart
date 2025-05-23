@@ -19,16 +19,13 @@ class BusStatusView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.colorF3F3F3,
+      backgroundColor: AppColors.white,
       body: Stack(
         children: [
           Column(
             children: [
               Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(AppSizes.radius_10),
-                        bottomLeft: Radius.circular(AppSizes.radius_10))),
+                color: AppColors.colorFEF1D6,
                 height: MediaQuery.of(context).size.height * 0.35,
                 width: double.infinity,
                 child: ClipRRect(
@@ -76,9 +73,7 @@ class BusStatusView extends StatelessWidget {
     StudentBusStatus data = controller.studentBusStatusList[index];
     return InkWell(
       onTap: () {
-        /*  Get.to(() => RouteDataView(data: data),
-            transition: Transition.upToDown,
-            duration: const Duration(milliseconds: 300));*/
+
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 20),
@@ -90,11 +85,17 @@ class BusStatusView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.primaryColor),
-                    shape: BoxShape.circle
+                      border: Border.all(color: AppColors.primaryColor),
+                      shape: BoxShape.circle),
+                  child: Image.network(
+                    "",
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return SvgPicture.asset(data.gender
+                          ? Assets.svgGirlIcon
+                          : Assets.svgBoyIcon);
+                    },
                   ),
-                  child: SvgPicture.asset(
-                      data.gender ? Assets.svgGirlIcon : Assets.svgBoyIcon),
                 ).paddingOnly(right: 10),
                 Expanded(
                   child: Column(
@@ -112,7 +113,9 @@ class BusStatusView extends StatelessWidget {
                             textAlign: TextAlign.center,
                             text: TextSpan(
                               text: 'Adm. No.: ',
-                              style: AppTextStyles(context).display12W500.copyWith(color: AppColors.color949495),
+                              style: AppTextStyles(context)
+                                  .display12W500
+                                  .copyWith(color: AppColors.color949495),
                               children: [
                                 TextSpan(
                                   text: data.admissionNo,
@@ -122,9 +125,11 @@ class BusStatusView extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 9),
-                            decoration: Utils().commonDecoration(shadow: false, color: AppColors.colorF3F3F3),
-                            child:  Text(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 9),
+                            decoration: Utils().commonDecoration(
+                                shadow: false, color: AppColors.colorF3F3F3),
+                            child: Text(
                               data.grade,
                               style: AppTextStyles(context).display12W500,
                               overflow: TextOverflow.ellipsis,
@@ -136,14 +141,18 @@ class BusStatusView extends StatelessWidget {
                   ),
                 ),
               ],
-            ).paddingOnly(bottom: 10),
+            ).paddingOnly(bottom: 10, left: 9, right: 9),
             Utils().dottedLine().paddingOnly(bottom: 10),
             Row(
               children: [
                 Expanded(
                     child: Row(
                   children: [
-                    SvgPicture.asset( Assets.svgBusIcon, width: 20, height: 20,).paddingOnly(right: 10),
+                    SvgPicture.asset(
+                      Assets.svgBusIcon,
+                      width: 20,
+                      height: 20,
+                    ).paddingOnly(right: 10),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
@@ -161,13 +170,20 @@ class BusStatusView extends StatelessWidget {
                 )),
                 Expanded(
                     child: Row(
-                      children: [
-                        SvgPicture.asset( Assets.svgBusStopIcon ,width: 20, height: 20,).paddingOnly(right: 10),
-                       Text(data.pickupTime, style: AppTextStyles(context).display14W500,)
-                      ],
-                    ))
+                  children: [
+                    SvgPicture.asset(
+                      Assets.svgBusStopIcon,
+                      width: 20,
+                      height: 20,
+                    ).paddingOnly(right: 10),
+                    Text(
+                      data.pickupPoint,
+                      style: AppTextStyles(context).display14W500,
+                    )
+                  ],
+                ))
               ],
-            ),
+            ).paddingOnly(left: 9, right: 9),
             Utils().dottedLine().paddingSymmetric(vertical: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,10 +191,9 @@ class BusStatusView extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      if(data.busStatus == BusStatus.transit.value){
-                        Get.to(() => TrackBusView(),
-                            transition: Transition.upToDown,
-                            duration: const Duration(milliseconds: 300));
+                      if (data.busStatus == BusStatus.transit.value) {
+                        Utils().navigate(TrackBusView());
+
                       }
                     },
                     child: Container(
@@ -251,8 +266,7 @@ class BusStatusView extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-
+            ).paddingOnly( left: 9, right: 9),
           ],
         ),
       ).paddingOnly(bottom: 16),

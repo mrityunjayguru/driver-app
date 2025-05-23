@@ -241,4 +241,11 @@ class Utils {
     );
   }
 
+
+  void navigate(Widget page){
+    Get.to(() => page,
+        transition: Transition.upToDown,
+        duration: const Duration(milliseconds: 300));
+  }
+
 }

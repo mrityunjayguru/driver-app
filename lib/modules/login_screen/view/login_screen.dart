@@ -213,10 +213,7 @@ class LoginView extends StatelessWidget {
                                     ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    /*   Get.to(() => TermsConditionView(),
-                                          transition: Transition.upToDown,
-                                          duration: const Duration(
-                                              milliseconds: 300));*/
+
                                   }),
                             TextSpan(
                               text: 'and ',
@@ -236,10 +233,6 @@ class LoginView extends StatelessWidget {
                                     ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    /*  Get.to(() => PrivacyPolicyView(),
-                                          transition: Transition.upToDown,
-                                          duration: const Duration(
-                                              milliseconds: 300));*/
                                   }),
                           ],
                         ),
@@ -283,12 +276,6 @@ class LoginView extends StatelessWidget {
               // Clickable text style
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  /*   Get.to(
-                      () => ForgotView(
-                            fromLogin: true,
-                          ),
-                      transition: Transition.upToDown,
-                      duration: const Duration(milliseconds: 300));*/
                 },
             ),
           ],
