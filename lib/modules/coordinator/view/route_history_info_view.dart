@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
 import 'package:route_roster_pro/generated/assets.dart';
@@ -33,7 +35,7 @@ class RouteHistoryInfoView extends StatelessWidget {
             children: [
               Container(
                 color: AppColors.colorFEF1D6,
-                height: MediaQuery.of(context).size.height * 0.15,
+                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.15 :  MediaQuery.of(context).size.height * 0.175,
                 width: double.infinity,
               ),
               Expanded(

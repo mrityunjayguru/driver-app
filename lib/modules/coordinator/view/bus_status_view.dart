@@ -42,7 +42,7 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 6),
                 color: AppColors.colorFEF1D6,
-                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.15 :  MediaQuery.of(context).size.height * 0.17 ,
+                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.15 :  MediaQuery.of(context).size.height * 0.175,
                 width: double.infinity,
                 child: Obx(
                   () => Align(

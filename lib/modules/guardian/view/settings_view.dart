@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:route_roster_pro/config/app_sizer.dart';
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
@@ -31,7 +33,7 @@ class SettingsView extends StatelessWidget {
             children: [
               Container(
                 color: AppColors.colorFEF1D6,
-                height: MediaQuery.of(context).size.height * 0.15,
+                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.15 :  MediaQuery.of(context).size.height * 0.175,
                 width: double.infinity,
               ),
               Expanded(
@@ -125,7 +127,7 @@ class SettingsView extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ).paddingSymmetric(horizontal: 12, vertical: 10).paddingOnly(bottom: 100),
+                  ).paddingSymmetric(horizontal: 12, vertical: 10).paddingOnly(bottom:Platform.isAndroid ? 80 : 50),
                 ),
               ],
             ),
