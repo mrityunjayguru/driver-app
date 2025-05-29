@@ -29,6 +29,16 @@ class RouteListView extends StatelessWidget {
                 itemBuilder: (context, index) => listItem(context, index),
                 itemCount: controller.routeList.length,
               ).paddingSymmetric(horizontal: 12).paddingOnly(top: 18),
+            ),
+            InkWell(
+              onTap: (){
+                Utils().logout();
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 17, horizontal: 54),
+                decoration: Utils().commonDecoration(color: AppColors.black, shadow: false),
+                child: Text("Logout", style: AppTextStyles(context).display20W500.copyWith(color: Colors.white),),
+              ).paddingOnly(bottom: 20, top: 20),
             )
           ],
         ),

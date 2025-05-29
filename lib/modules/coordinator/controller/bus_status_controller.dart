@@ -9,6 +9,7 @@ import '../view/widgets/stop_widget.dart';
 
 class CoordinatorBusStatusController extends GetxController{
   RxInt tab = 0.obs;
+  RxBool openDropdown = false.obs;
   final List<StudentBusStatus> studentBusStatusList = [
     StudentBusStatus(
       name: "Kannu Chaudhary",
@@ -37,7 +38,6 @@ class CoordinatorBusStatusController extends GetxController{
 
 
   void switchTab(int tabNo){
-    debugPrint("TAB $tabNo");
     tab.value = tabNo;
   }
 

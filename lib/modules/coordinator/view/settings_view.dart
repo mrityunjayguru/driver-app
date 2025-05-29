@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:route_roster_pro/config/app_sizer.dart';
 import 'package:route_roster_pro/config/theme/app_textstyle.dart';
 import 'package:route_roster_pro/generated/assets.dart';
+import 'package:route_roster_pro/modules/coordinator/controller/settings_controller.dart';
+import 'package:route_roster_pro/modules/coordinator/controller/settings_controller.dart';
 import 'package:route_roster_pro/modules/guardian/model/bus_status_model.dart';
 import 'package:route_roster_pro/modules/guardian/view/history_view.dart';
 import 'package:route_roster_pro/utils/utils.dart';
@@ -23,7 +25,7 @@ class CoordinatorSettingsView extends StatelessWidget {
       return const Icon(Icons.close, color: Colors.transparent);
     },
   );
-  final CoordinatorProfileController controller = Get.put(CoordinatorProfileController());
+  final CoordinatorSettingsController controller = Get.put(CoordinatorSettingsController());
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class CoordinatorSettingsView extends StatelessWidget {
           ),
           SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Utils().topBar("Settings",
                     backIcon: false, rightIcon: Assets.svgActiveBellIcon),
@@ -93,7 +95,8 @@ class CoordinatorSettingsView extends StatelessWidget {
                     img: ''),
                 InkWell(
                   onTap: () {
-                    Utils().navigate(CoordinatorHistoryView());
+                    controller.pickDate(context);
+
                   },
                   child: Container(
                     padding:
@@ -110,9 +113,19 @@ class CoordinatorSettingsView extends StatelessWidget {
                       ),
                     ),
                   ),
-                ).paddingSymmetric(horizontal: 12, vertical: 16)
+                ).paddingSymmetric(horizontal: 12, vertical: 16),
+                InkWell(
+                  onTap: (){
+                    Utils().logout();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 17, horizontal: 54),
+                    decoration: Utils().commonDecoration(color: AppColors.black, shadow: false),
+                    child: Text("Logout", style: AppTextStyles(context).display20W500.copyWith(color: Colors.white),),
+                  ).paddingOnly(bottom: 20, top: 20),
+                )
               ],
-            ),
+            ).paddingOnly(bottom: 12),
           ),
         ],
       ),

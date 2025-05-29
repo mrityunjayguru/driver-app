@@ -53,6 +53,7 @@ class Assets {
   static const String svgPickupIcon = 'assets/images/svg/pickup_icon.svg';
   static const String svgProfileIcon = 'assets/images/svg/profile_icon.svg';
   static const String svgRightArr = 'assets/images/svg/right_arr.svg';
+  static const String svgRouteInfoIcon = 'assets/images/svg/route_info_icon.svg';
   static const String svgSchoolIcon = 'assets/images/svg/school_icon.svg';
   static const String svgSettingsIcon = 'assets/images/svg/settings_icon.svg';
   static const String svgTimelineIcon = 'assets/images/svg/timeline_icon.svg';

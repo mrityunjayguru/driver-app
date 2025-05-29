@@ -43,7 +43,7 @@ class SettingsView extends StatelessWidget {
           ),
           SafeArea(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Utils().topBar("Settings",
                     backIcon: false, rightIcon: Assets.svgActiveBellIcon),
@@ -127,8 +127,18 @@ class SettingsView extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ).paddingSymmetric(horizontal: 12, vertical: 10).paddingOnly(bottom:Platform.isAndroid ? 80 : 50),
+                  ).paddingSymmetric(horizontal: 12, vertical: 10),
                 ),
+                InkWell(
+                  onTap: (){
+                    Utils().logout();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 17, horizontal: 54),
+                    decoration: Utils().commonDecoration(color: AppColors.black, shadow: false),
+                    child: Text("Logout", style: AppTextStyles(context).display20W500.copyWith(color: Colors.white),),
+                  ).paddingOnly(bottom: 20, top: 20),
+                )
               ],
             ),
           ),

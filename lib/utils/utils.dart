@@ -9,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../config/app_sizer.dart';
 import '../config/theme/app_colors.dart';
 import '../generated/assets.dart';
+import '../routes/app_pages.dart';
+import 'app_prefrance.dart';
 import 'common_import.dart';
 
 class Utils {
@@ -140,7 +142,12 @@ class Utils {
     return FilteringTextInputFormatter.digitsOnly;
   }
 
-  Widget topBar(String text, {bool backIcon = false, String? textRight, String? rightIcon, VoidCallback? onTap}) {
+  Widget topBar(String text,
+      {bool backIcon = false,
+      String? textRight,
+      String? rightIcon,
+      VoidCallback? onTap,
+      double? rotation}) {
     return Builder(builder: (context) {
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 12),
@@ -155,7 +162,16 @@ class Utils {
                 .copyWith(color: AppColors.color2C2C2C),
           ),
           const Spacer(),
-          if (backIcon) InkWell(onTap:(){Get.back();},child: SvgPicture.asset(Assets.svgIcBack, width: 24, height: 24,).paddingOnly(right: 5)),
+          if (backIcon)
+            InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: SvgPicture.asset(
+                  Assets.svgIcBack,
+                  width: 24,
+                  height: 24,
+                ).paddingOnly(right: 5)),
           if (textRight != null)
             Text(
               textRight,
@@ -164,7 +180,16 @@ class Utils {
                   .copyWith(color: AppColors.primaryColor),
             ).paddingOnly(right: 10),
           if (rightIcon != null)
-            InkWell(onTap:onTap,child: SvgPicture.asset(rightIcon, width: 24, height: 24,).paddingOnly(right: 5))
+            Transform.rotate(
+              angle: rotation ?? 0,
+              child: InkWell(
+                  onTap: onTap,
+                  child: SvgPicture.asset(
+                    rightIcon,
+                    width: 24,
+                    height: 24,
+                  ).paddingOnly(right: 5)),
+            )
         ]),
       ).paddingOnly(top: 10);
     });
@@ -176,16 +201,18 @@ class Utils {
         borderRadius: BorderRadius.circular(AppSizes.radius_4),
         boxShadow: shadow
             ? [
-                 BoxShadow(
-                  color: const Color(0xFF000000).withOpacity(0.25), // Equivalent to #00000040
-                  offset: const Offset (0, 1), // x: 0px, y: 1px
-                  blurRadius: 8, // blur radius
+                BoxShadow(
+                  color: const Color(0xFF000000).withOpacity(0.25),
+                  // Equivalent to #00000040
+                  offset: const Offset(0, 1),
+                  // x: 0px, y: 1px
+                  blurRadius: 8,
+                  // blur radius
                   spreadRadius: 0, // no spread
                 ),
               ]
             : null);
   }
-
 
   Widget dottedLine({
     double width = double.infinity,
@@ -214,6 +241,7 @@ class Utils {
       ),
     );
   }
+
   Widget verticalDottedLine({
     double height = 42,
     double thickness = 0.5,
@@ -241,11 +269,48 @@ class Utils {
     );
   }
 
-
-  void navigate(Widget page){
+  void navigate(Widget page) {
     Get.to(() => page,
         transition: Transition.upToDown,
         duration: const Duration(milliseconds: 300));
+  }
+
+  Future<void> selectDate(
+      {required BuildContext context,
+      DateTime? initialDate,
+      required Function(DateTime) onDatePicked}) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: ColorScheme.light(
+              primary: AppColors.primaryColor,
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.primaryColor,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null) {
+      onDatePicked(picked);
+    }
+  }
+
+  void logout() async {
+    await AppPreference.clearSharedPreferences();
+    Get.offNamed(Routes.LOGIN);
   }
 
 }

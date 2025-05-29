@@ -17,98 +17,96 @@ class BottomBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Obx(
         () {
           final int currentIndex = controller.selectedIndex.value;
 
-          return Stack(
+          return Column(
             children: [
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                transitionBuilder: (Widget child, Animation<double> animation) {
-                  // Determine direction based on index comparison
-                  final Offset beginOffset =
-                      (controller.previousIndex.value > currentIndex)
-                          ? const Offset(-1, 0) // Slide in from the left
-                          : const Offset(1, 0); // Slide in from the right
-
-                  return SlideTransition(
-                    position: Tween<Offset>(
-                      begin: beginOffset,
-                      end: Offset.zero,
-                    ).animate(animation),
-                    child: child,
-                  );
-                },
-                child: KeyedSubtree(
-                  // Assign a unique key for each screen
-                  key: ValueKey<int>(currentIndex),
-                  child: controller.loginType.value == LoginType.guardian.name
-                      ? controller.screens[currentIndex]
-                      : controller.screensCoordinator[currentIndex],
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (Widget child, Animation<double> animation) {
+                    // Determine direction based on index comparison
+                    final Offset beginOffset =
+                        (controller.previousIndex.value > currentIndex)
+                            ? const Offset(-1, 0) // Slide in from the left
+                            : const Offset(1, 0); // Slide in from the right
+                
+                    return SlideTransition(
+                      position: Tween<Offset>(
+                        begin: beginOffset,
+                        end: Offset.zero,
+                      ).animate(animation),
+                      child: child,
+                    );
+                  },
+                  child: KeyedSubtree(
+                    // Assign a unique key for each screen
+                    key: ValueKey<int>(currentIndex),
+                    child: controller.loginType.value == LoginType.guardian.name
+                        ? controller.screens[currentIndex]
+                        : controller.screensCoordinator[currentIndex],
+                  ),
                 ),
               ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Obx(
-                      () => Transform.translate(
-                        offset: Offset(0, 0.4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                                child: controller.selectedIndex.value == 0
-                                    ? SvgPicture.asset(Assets.svgNotchBottomBar)
-                                    : SizedBox.shrink()),
-                            Expanded(
-                                child: controller.selectedIndex.value == 1
-                                    ? SvgPicture.asset(Assets.svgNotchBottomBar)
-                                    : SizedBox.shrink()),
-                            Expanded(
-                                child: controller.selectedIndex.value == 2
-                                    ? SvgPicture.asset(Assets.svgNotchBottomBar)
-                                    : SizedBox.shrink())
-                          ],
-                        ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Obx(
+                    () => Transform.translate(
+                      offset: Offset(0, 0.4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Expanded(
+                              child: controller.selectedIndex.value == 0
+                                  ? SvgPicture.asset(Assets.svgNotchBottomBar)
+                                  : SizedBox.shrink()),
+                          Expanded(
+                              child: controller.selectedIndex.value == 1
+                                  ? SvgPicture.asset(Assets.svgNotchBottomBar)
+                                  : SizedBox.shrink()),
+                          Expanded(
+                              child: controller.selectedIndex.value == 2
+                                  ? SvgPicture.asset(Assets.svgNotchBottomBar)
+                                  : SizedBox.shrink())
+                        ],
                       ),
                     ),
-                    Obx(
-                      () => Container(
-                        decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(AppSizes.radius_10),
-                            color: AppColors.black),
-                        child: Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            if (controller.loginType.value ==
-                                LoginType.guardian.name) ...[
-                              profileTab(context, controller.selectedIndex.value == 0, 0),
-                              busStatusTab(context, controller.selectedIndex.value == 1, 1)
-                            ] else ...[
-                              busStatusTab(context, controller.selectedIndex.value == 0, 0),
-                              profileTab(context, controller.selectedIndex.value == 1, 1)
-                            ],
-                            bottomTabs(
-                              context: context,
-                              img: Assets.svgSettingsIcon,
-                              title: "Settings",
-                              isSelected:
-                              controller.selectedIndex.value == 2,
-                              onTap: () => controller.updateIndex(2),
-                            ),
+                  ),
+                  Obx(
+                    () => Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(AppSizes.radius_10),
+                          color: AppColors.black),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          if (controller.loginType.value ==
+                              LoginType.guardian.name) ...[
+                            profileTab(context, controller.selectedIndex.value == 0, 0),
+                            busStatusTab(context, controller.selectedIndex.value == 1, 1, true)
+                          ] else ...[
+                            busStatusTab(context, controller.selectedIndex.value == 0, 0, false),
+                            profileTab(context, controller.selectedIndex.value == 1, 1)
                           ],
-                        ),
+                          bottomTabs(
+                            context: context,
+                            img: Assets.svgSettingsIcon,
+                            title: "Settings",
+                            isSelected:
+                            controller.selectedIndex.value == 2,
+                            onTap: () => controller.updateIndex(2),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ).paddingOnly(bottom: 16, left: 13, right: 13),
-              )
+                  ),
+                ],
+              ).paddingOnly(bottom: 16, left: 13, right: 13)
             ],
           );
         },
@@ -126,11 +124,11 @@ class BottomBarView extends StatelessWidget {
     );
   }
 
-  Widget busStatusTab(BuildContext context, bool isSelected, int index) {
+  Widget busStatusTab(BuildContext context, bool isSelected, int index, bool busStatus) {
     return bottomTabs(
       context: context,
-      img: Assets.svgBusStatusIcon,
-      title: "Bus Status",
+      img: busStatus ? Assets.svgBusStatusIcon : Assets.svgRouteInfoIcon,
+      title: busStatus ? "Bus Status" : "Route Info",
       isSelected: isSelected,
       onTap: () => controller.updateIndex(index),
     );

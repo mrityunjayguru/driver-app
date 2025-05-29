@@ -34,6 +34,7 @@ class CoordinatorProfileController extends GetxController {
 
   void switchTabs(int tab) {
    try{
+
      final controller = Get.find<BottomBarController>();
      debugPrint("sel index ${controller.selectedIndex.value}");
      controller.switchToBusView(0, tab);

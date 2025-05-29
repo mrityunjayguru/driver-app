@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:route_roster_pro/config/app_sizer.dart';
@@ -17,7 +18,8 @@ class CoordinatorBusStatusView extends StatefulWidget {
   CoordinatorBusStatusView({super.key});
 
   @override
-  State<CoordinatorBusStatusView> createState() => _CoordinatorBusStatusViewState();
+  State<CoordinatorBusStatusView> createState() =>
+      _CoordinatorBusStatusViewState();
 }
 
 class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
@@ -25,9 +27,10 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
       Get.put(CoordinatorBusStatusController());
 
   final PageController pageController = PageController();
+
   @override
-  void initState(){
-    controller.tab.value=0;
+  void initState() {
+    controller.tab.value = 0;
     super.initState();
   }
 
@@ -42,7 +45,9 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 6),
                 color: AppColors.colorFEF1D6,
-                height: Platform.isAndroid ? MediaQuery.of(context).size.height * 0.15 :  MediaQuery.of(context).size.height * 0.175,
+                height: Platform.isAndroid
+                    ? MediaQuery.of(context).size.height * 0.15
+                    : MediaQuery.of(context).size.height * 0.175,
                 width: double.infinity,
                 child: Obx(
                   () => Align(
@@ -65,8 +70,76 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
           SafeArea(
             child: Column(
               children: [
-                Utils().topBar("Route Info",
-                    backIcon: false, rightIcon: Assets.svgBellIcon).paddingOnly(bottom: 50),
+                Obx(
+                  () => Column(
+                    children: [
+                      Utils().topBar("Route 12", onTap: () {
+                        controller.openDropdown.value =
+                            !controller.openDropdown.value;
+                      },
+                          rotation: controller.openDropdown.value
+                              ? -(270 * (pi / 180))
+                              : 270 * (pi / 180),
+                          backIcon: false,
+                          rightIcon: Assets.svgIcBack),
+                      if (controller.openDropdown.value)
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          constraints: BoxConstraints(maxHeight: 200),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(AppSizes.radius_4),
+                              bottomRight: Radius.circular(AppSizes.radius_4),
+                            ),
+                            boxShadow: [
+                              // Bottom shadow
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.15),
+                                offset: Offset(0, 3),
+                                blurRadius: 6,
+                                spreadRadius: 0,
+                              ),
+                              // Left shadow
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.07),
+                                offset: Offset(-2, 1),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                              ),
+                              // Right shadow
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.07),
+                                offset: Offset(2, 1),
+                                blurRadius: 4,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                          ),
+                          child: ListView.separated(
+                              itemBuilder: (context, index) => InkWell(
+                                onTap: (){
+                                  controller.openDropdown.value=false;
+                                },
+                                child: Container(
+                                  child: Text(
+                                        "Route 12",
+                                        style: AppTextStyles(context)
+                                            .display20W500
+                                            .copyWith(
+                                                color: AppColors.primaryColor),
+                                      ).paddingAll(7),
+                                ),
+                              ),
+                              separatorBuilder: (context, index) =>
+                                  Utils().dottedLine(),
+                              itemCount: 10),
+                        )
+                    ],
+                  ).paddingOnly(
+                      bottom: controller.openDropdown.value ? 20 : 50),
+                ),
                 Expanded(
                   child: PageView(
                     controller: pageController,
@@ -76,9 +149,8 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
                     children: controller.screens,
                   ),
                 ),
-
               ],
-            ),
+            ).paddingOnly(bottom: 12),
           ),
         ],
       ),
@@ -297,7 +369,6 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
               curve: Curves.easeInOut,
             );
           },
-
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 6),
             padding: const EdgeInsets.symmetric(vertical: 3),
@@ -308,7 +379,7 @@ class _CoordinatorBusStatusViewState extends State<CoordinatorBusStatusView> {
                     topRight: Radius.circular(AppSizes.radius_4))),
             child: Text(
               name,
-              textAlign:TextAlign.center,
+              textAlign: TextAlign.center,
               style: AppTextStyles(context).display14W600.copyWith(
                     color: selected ? AppColors.primaryColor : AppColors.white,
                   ),

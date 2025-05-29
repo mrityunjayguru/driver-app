@@ -129,7 +129,7 @@ class CoordinatorProfileView extends StatelessWidget {
                   ),
                 )
               ],
-            ),
+            ).paddingOnly(bottom: 12),
           ),
         ],
       ),

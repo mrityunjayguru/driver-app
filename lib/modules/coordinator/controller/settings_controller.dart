@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 
+import '../../../utils/utils.dart';
 import '../../guardian/model/bus_status_model.dart';
 import '../../guardian/model/stop_model.dart';
+import '../view/history_view.dart';
 
 
 class CoordinatorSettingsController extends GetxController {
@@ -42,5 +44,11 @@ class CoordinatorSettingsController extends GetxController {
     Stop(time: "07:02", date: "15", month: "May", holiday: false, ),
     Stop(time: "02:46", date: "15", month: "May", holiday: false,  canceledDropOff: true),
   ];
+
+  void pickDate(context){
+    Utils().selectDate(context : context,onDatePicked: (onDatePicked){
+      Utils().navigate(CoordinatorHistoryView());
+    } );
+  }
 
 }

@@ -200,6 +200,7 @@ class BusStatusView extends StatelessWidget {
                     },
                     child: Container(
                       padding: const EdgeInsets.all(9),
+                      margin: const EdgeInsets.only(right: 10),
                       decoration: Utils().commonDecoration(
                           color: data.busStatus == BusStatus.transit.value
                               ? AppColors.primaryColor
